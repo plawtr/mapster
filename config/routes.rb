@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  match 'panic', to: 'incidents#report', via: [ :post, :options]
-  match 'incidents/report', to: 'incidents#report', via: [ :post, :options]
+  post 'panic', to: 'incidents#report', :as=>'panic'
+  post 'incidents/report', to: 'incidents#report'
   get 'heatmap', to: 'incidents#heatmap', :as=>'heatmap'
 end
