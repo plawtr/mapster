@@ -1,16 +1,16 @@
 class IncidentsController < ApplicationController
 
   def report
-
   	incident = Incident.new
-
-  	#todo: if route is panic then type is panic else type is report
-  	incident.type = params[:type]
   	incident.lng = params[:lng]
   	incident.lat = params[:lat]
 
-  	#todo: optional
-  	incident.message = params[:message]
+    if request.path.include? "report"
+       incident.type = "report"
+  	   incident.message = params[:message]
+    else
+      incident.type == "panic"
+    end
 
   	if incident.save
   		render :json => {"result"=>"OK"}
@@ -21,8 +21,7 @@ class IncidentsController < ApplicationController
   end
 
   def heatmap
-  	#heatmap = Incident.within(5, :origin => [params[:lat], params[:lng]])
-  	heatmap = Incident.all
-  	render :json => {"result"=> heatmap}
+  	heatmap = Incident.within(5, :origin => [params[:lat], params[:lng]])
+  	render :json => {"result"=>heatmap}
   end	
 end
