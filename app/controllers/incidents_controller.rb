@@ -26,4 +26,10 @@ class IncidentsController < ApplicationController
   	render :json => {"result"=>heatmap}
   end	
 
+  def firehose
+    firehose = Incident.order(created_at: :desc)
+    render :json => {"result"=>firehose}
+  end 
+
+
 end
