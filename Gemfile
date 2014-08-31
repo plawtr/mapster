@@ -43,3 +43,5 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'rack-cors', :require => 'rack/cors'
+
+gem 'rails_12factor', group: :production
